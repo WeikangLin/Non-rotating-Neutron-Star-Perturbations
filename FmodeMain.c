@@ -11,8 +11,24 @@
 static double a[3000],b[3000],n;
 static int j=0;
 
-double che(e)
-double e;
+
+double che(double e);
+double ch(double p);
+double fp(double r, double p, double e, double m);
+double fm(double r, double e);
+double Bf(double r, double p, double m, double B);
+double DH1(double r, double m, double A, double p, double e, double H1, double H0, double K, double V);
+double DK(double r, double H0, double H1, double Dv, double K, double e, double p, double A, double W);
+double DW(double r, double W, double A, double gamma, double p, double B, double X, double V, double H0, double K);
+double DX(double r, double X, double e, double p, double B, double Dv, double H0, double w, double H1, double K, double V, double A, double F, double W);
+double H0f(double r, double B, double X, double m, double p, double A, double H1, double K, double w);
+double Vf(double r, double w, double e, double p, double B, double A, double Dp, double W, double H0, double X);
+double gammafunction(double e);
+double Ff(double r, double A, double e, double p, double m, double Dp);
+
+
+
+double che(double e)
 {
 double le;
 double p,lp;
@@ -31,8 +47,8 @@ p=pow(10,lp);
 return(p);
 }
 
-double ch(p)
-double p;
+
+double ch(double p)
 {
 double lp;
 double e,le;
@@ -51,8 +67,8 @@ e=pow(10,le);
 return(e);
 }
 
-double fp(r,p,e,m)
-double r,p,e,m;
+
+double fp(double r, double p, double e, double m)
 {
 double g1, g2;
 g1=-G*(e+p/c/c)*(m+4*pi*r*r*r*p/c/c);
@@ -60,16 +76,16 @@ g2=(r*r-2*G*r*m/c/c);
 return(g1/g2);
 }
 
-double fm(r,e)
-double r,e;
+
+double fm(double r, double e)
 {
 double mf;
 mf=4*pi*r*r*e;
 return(mf);
 }
 
-double Bf(r,p,m,B)
-double r,p,m,B;
+
+double Bf(double r, double p, double m, double B)
 {
 double dB, A;
 A=1/(1-2*G*m/r/c/c);
@@ -77,40 +93,40 @@ dB=2*G/c/c/r/r*(m+4*pi*r*r*r*p/c/c)*A*B;
 return(dB);
 }
 
-double DH1(r,m,A,p,e,H1,H0,K,V)
-double r,m,A,p,e,H1,H0,K,V;
+
+double DH1(double r, double m, double A, double p, double e, double H1, double H0, double K, double V)
 {
 double dH1;
 dH1=-1/r*(l+1+2*m*A/r+4*pi*r*r*A*(p-e))*H1+1/r*A*(H0+K-16*pi*(e+p)*V);
 return(dH1);
 }
 
-double DK(r,H0,H1,Dv,K,e,p,A,W)
-double r,H0,H1,Dv,K,e,p,A,W;
+
+double DK(double r, double H0, double H1, double Dv, double K, double e, double p, double A, double W)
 {
 double dK;
 dK=1/r*H0+0.5*l*(l+1)/r*H1-((l+1)/r-0.5*Dv)*K-8*pi*(e+p)*sqrt(A)/r*W;
 return(dK);
 }
 
-double DW(r,W,A,gamma,p,B,X,V,H0,K)
-double r,W,A,gamma,p,B,X,V,H0,K;
+
+double DW(double r, double W, double A, double gamma, double p, double B, double X, double V, double H0, double K)
 {
 double dW;
 dW=-(l+1)/r*W+r*sqrt(A)*(1/gamma/p/sqrt(B)*X-l*(l+1)/r/r*V+0.5*H0+K);
 return(dW);
 }
 
-double DX(r,X,e,p,B,Dv,H0,w,H1,K,V,A,F,W)
-double r,X,e,p,B,Dv,H0,w,H1,K,V,A,F,W;
+
+double DX(double r, double X, double e, double p, double B, double Dv, double H0, double w, double H1, double K, double V, double A, double F, double W)
 {
 double dX;
 dX=-l/r*X+(e+p)*sqrt(B)*(0.5*(1/r-0.5*Dv)*H0+0.5*(r*w*w/B+0.5*l*(l+1)/r)*H1+0.5*(1.5*Dv-1/r)*K-0.5*l*(l+1)*Dv/r/r*V-1/r*(4*pi*(e+p)*sqrt(A)+w*w*sqrt(A)/B-0.5*r*r*F)*W);
 return(dX);
 }
 
-double H0f(r,B,X,m,p,A,H1,K,w)
-double r,B,X,m,p,A,H1,K,w;
+
+double H0f(double r, double B, double X, double m, double p, double A, double H1, double K, double w)
 {
 double H0;
 H0=8*pi*r*r*r/sqrt(B)*X-(0.5*l*(l+1)*(m+4*pi*r*r*r*p)-w*w*r*r*r/A/B)*H1+(0.5*(l+2)*(l-1)*r-w*w*r*r*r/B-1/r*A*(m+4*pi*r*r*r*p)*(3*m-r+4*pi*r*r*r*p))*K;
@@ -118,16 +134,16 @@ H0=H0/(3*m+0.5*(l+2)*(l-1)*r+4*pi*r*r*r*p);
 return(H0);
 }
 
-double Vf(r,w,e,p,B,A,Dp,W,H0,X)
-double r,w,e,p,B,A,Dp,W,H0,X;
+
+double Vf(double r, double w, double e, double p, double B, double A, double Dp, double W, double H0, double X)
 {
 double V;
 V=1/w/w/(e+p)*B*(1/sqrt(B)*X+1/r*Dp/sqrt(A)*W-0.5*(e+p)*H0);
 return(V);
 }
 
-double gammaf(e)
-double e;
+
+double gammafunction(double e)
 {
 double le, p, gamma;
 int i=j-1;
@@ -146,8 +162,8 @@ for(;i>0;i=i-1)
 return(gamma);
 }
 
-double Ff(r,A,e,p,m,Dp)
-double r,A,e,p,m,Dp;
+
+double Ff(double r, double A, double e, double p, double m, double Dp)
 {
 double F;
 F=8*pi/r/r*sqrt(A);
@@ -310,7 +326,7 @@ Dv=-2*Dp/(e+p);
 
 
 A=1/(1-2*m/r);
-gamma=gammaf(e);
+gamma=gammafunction(e);
 H0=H0f(r,B,X,m,p,A,H1,K,w);
 V=Vf(r,w,e,p,B,A,Dp,W,H0,X);
 if(r==r0)V01=V;else;
@@ -379,7 +395,7 @@ Dp=-(e+p)*(m+4*pi*r*r*r*p)/r/r/(1-2*m/r);
 Dv=-2*Dp/(e+p);
 
 A=1/(1-2*m/r);
-gamma=gammaf(e);
+gamma=gammafunction(e);
 H0=H0f(r,B,X,m,p,A,H1,K,w);
 V=Vf(r,w,e,p,B,A,Dp,W,H0,X);
 if(r==r0)V02=V;else;
@@ -516,5 +532,5 @@ fprintf(outf,"%f    %f    %f      %f\n", mR/G*c*c/M,RR/1000,(w*3E5/2/pi),1/wi/c)
 }
 fclose(outf);
   printf("Results have been saved in %s. \nPlease press any key to contiune.\n",opfile);
-  getch();
+  //getch();
 }
